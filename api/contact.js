@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
     await resend.emails.send({
       from: "Impulso Web Studio <onboarding@resend.dev>",
-      to: "studioimpulsoweb@gmail.com",
+      to: "joaquinnhoz1@gmail.com",
       subject: "Nuevo mensaje desde la web",
       html: `
         <h2>Nuevo mensaje de contacto</h2>
