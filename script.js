@@ -287,21 +287,19 @@ function initContactForm() {
 
     try {
       const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          nombre: name.value,
-          email: email.value,
-          mensaje: `
-Tipo de sitio: ${siteType?.value || 'No especificado'}
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    nombre: name.value,
+    email: email.value,
+    mensaje: `Tipo de sitio: ${siteType?.value || 'No especificado'}
 
 Mensaje:
-${message?.value || ''}
-          `,
-        }),
-      });
+${message?.value || ''}`,
+  }),
+});
 
       if (!response.ok) {
         throw new Error('Error al enviar');
