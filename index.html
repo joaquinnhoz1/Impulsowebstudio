@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[Tu Marca] — Sitios Web Profesionales con Dominio Incluido</title>
+  <meta name="description" content="Creamos tu sitio web profesional con dominio propio incluido. Diseños únicos, rápidos y a medida." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- Sin dependencias externas pesadas. Google Fonts es opcional; ver instrucciones abajo. -->
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVEGACIÓN
+  ============================================================ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navegación principal">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo" aria-label="Inicio">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">[Tu Marca]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#estilos">Estilos</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <button class="nav-cta" onclick="scrollToSection('contacto')">Quiero mi sitio →</button>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       SECCIÓN 1 — HERO (Taza de café animada)
+  ============================================================ -->
+  <section class="hero" id="inicio" aria-label="Inicio">
+
+    <!-- Fondo con partículas / puntos decorativos -->
+    <div class="hero-bg" aria-hidden="true">
+      <div class="bg-dot bg-dot--1"></div>
+      <div class="bg-dot bg-dot--2"></div>
+      <div class="bg-dot bg-dot--3"></div>
+      <div class="bg-circle bg-circle--1"></div>
+      <div class="bg-circle bg-circle--2"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Diseño web profesional · Dominio incluido</p>
+        <h1 class="hero-title">
+          Tu negocio merece<br/>
+          <em>una presencia digital</em><br/>
+          que impresione.
+        </h1>
+        <p class="hero-subtitle">
+          Creamos sitios web a medida — rápidos, modernos y con tu dominio propio desde el día uno.
+          Sin tecnicismos, sin dolores de cabeza.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn--primary" onclick="scrollToSection('contacto')">
+            Comenzar ahora
+          </button>
+          <button class="btn btn--ghost" onclick="scrollToSection('estilos')">
+            Ver ejemplos ↓
+          </button>
+        </div>
+        <div class="hero-trust">
+          <span>✓ Dominio propio incluido</span>
+          <span>✓ Entrega en 7 días</span>
+          <span>✓ Soporte post-entrega</span>
+        </div>
+      </div>
+
+      <!-- TAZA DE CAFÉ ANIMADA -->
+      <div class="coffee-wrapper" aria-hidden="true">
+        <div class="coffee-scene">
+
+          <!-- Vapor (aparece cuando la taza está llena) -->
+          <div class="steam" id="steam">
+            <div class="steam-line steam-line--1"></div>
+            <div class="steam-line steam-line--2"></div>
+            <div class="steam-line steam-line--3"></div>
+          </div>
+
+          <!-- Taza SVG -->
+          <svg class="cup-svg" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Taza de café que se llena">
+
+            <!-- Sombra base -->
+            <ellipse cx="100" cy="172" rx="55" ry="8" fill="rgba(0,0,0,0.12)" />
+
+            <!-- Plato -->
+            <ellipse cx="100" cy="162" rx="65" ry="10" fill="#e8ddd0"/>
+            <ellipse cx="100" cy="160" rx="65" ry="8" fill="#f0e6da"/>
+
+            <!-- Cuerpo de la taza (clip path para el llenado) -->
+            <defs>
+              <clipPath id="cupClip">
+                <!-- Forma trapezoidal de la taza -->
+                <path d="M 48 55 Q 44 155 55 158 L 145 158 Q 156 155 152 55 Z"/>
+              </clipPath>
+              <linearGradient id="coffeeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#3d1f00;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#6b3a1f;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#4a2410;stop-opacity:1" />
+              </linearGradient>
+              <linearGradient id="foamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#c8956a;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#a0714e;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+
+            <!-- Relleno de café (animado por JS) -->
+            <g clip-path="url(#cupClip)">
+              <!-- Fondo interior vacío -->
+              <rect x="44" y="50" width="112" height="115" fill="#fdf6f0"/>
+              <!-- Café (crece hacia arriba desde abajo) -->
+              <rect class="coffee-fill" id="coffeeFill" x="44" y="158" width="112" height="0" fill="url(#coffeeGrad)"/>
+              <!-- Espuma (sigue al café) -->
+              <rect class="coffee-foam" id="coffeeFoam" x="44" y="158" width="112" height="0" fill="url(#foamGrad)" opacity="0.7"/>
+              <!-- Brillo de espuma -->
+              <ellipse id="foamShine" cx="85" cy="158" rx="18" ry="4" fill="rgba(255,255,255,0.3)" opacity="0"/>
+            </g>
+
+            <!-- Borde exterior de la taza (por encima del relleno) -->
+            <path d="M 48 55 Q 44 155 55 158 L 145 158 Q 156 155 152 55 Z"
+                  fill="none" stroke="#d4c5b5" stroke-width="2.5"/>
+
+            <!-- Borde superior de la taza (elipse) -->
+            <ellipse cx="100" cy="55" rx="52" ry="10" fill="#f5ede4"/>
+            <ellipse cx="100" cy="55" rx="52" ry="10" fill="none" stroke="#d4c5b5" stroke-width="2"/>
+
+            <!-- Interior del borde superior -->
+            <ellipse cx="100" cy="55" rx="47" ry="8" fill="#fdf6f0"/>
+
+            <!-- Asa de la taza -->
+            <path d="M 152 80 Q 185 80 185 110 Q 185 140 152 140"
+                  fill="none" stroke="#d4c5b5" stroke-width="8" stroke-linecap="round"/>
+            <path d="M 152 80 Q 183 80 183 110 Q 183 138 152 140"
+                  fill="none" stroke="#f0e0d0" stroke-width="4" stroke-linecap="round"/>
+
+            <!-- Cuerpo principal de la taza (frente) -->
+            <path d="M 48 55 Q 44 155 55 158 L 145 158 Q 156 155 152 55"
+                  fill="none" stroke="#d4c5b5" stroke-width="1.5"/>
+
+            <!-- Logo/detalle decorativo en la taza -->
+            <text id="cupLabel" x="100" y="125" text-anchor="middle" font-family="Georgia, serif"
+                  font-size="11" fill="#c8a882" opacity="0" letter-spacing="2">WEB</text>
+
+          </svg>
+
+          <!-- Porcentaje de scroll -->
+          <div class="coffee-progress" id="coffeeProgress">
+            <span id="progressNum">0</span>%
+          </div>
+        </div>
+        <p class="coffee-caption">Hacé scroll para ver la magia ↓</p>
+      </div>
+    </div>
+
+    <!-- Indicador scroll -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 2 — SERVICIOS (Estilo Corporativo)
+  ============================================================ -->
+  <section class="services" id="servicios" aria-label="Servicios">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <p class="section-tag">Lo que ofrecemos</p>
+        <h2 class="section-title">Soluciones web completas<br/>para cada necesidad</h2>
+        <p class="section-sub">Cada proyecto incluye diseño personalizado, hosting y dominio propio. Sin costos ocultos.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card reveal reveal--delay-1" tabindex="0">
+          <div class="service-icon" aria-hidden="true">🛒</div>
+          <h3>Tiendas Online</h3>
+          <p>E-commerce completo con carrito, pagos y gestión de productos. Tu tienda abierta 24/7.</p>
+          <ul class="service-features">
+            <li>Catálogo ilimitado</li>
+            <li>Integración de pagos</li>
+            <li>Panel de administración</li>
+          </ul>
+          <span class="service-badge">Más solicitado</span>
+        </article>
+
+        <article class="service-card reveal reveal--delay-2" tabindex="0">
+          <div class="service-icon" aria-hidden="true">🏢</div>
+          <h3>Sitios Corporativos</h3>
+          <p>Presencia institucional sólida. Transmití confianza y profesionalismo desde el primer clic.</p>
+          <ul class="service-features">
+            <li>Diseño a medida</li>
+            <li>Optimizado para SEO</li>
+            <li>Formularios de contacto</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal reveal--delay-3" tabindex="0">
+          <div class="service-icon" aria-hidden="true">🎨</div>
+          <h3>Portafolios</h3>
+          <p>Mostrá tu trabajo de forma impactante. Para artistas, fotógrafos, diseñadores y creativos.</p>
+          <ul class="service-features">
+            <li>Galería interactiva</li>
+            <li>Diseño visual único</li>
+            <li>Adaptado a tu estilo</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal reveal--delay-1" tabindex="0">
+          <div class="service-icon" aria-hidden="true">📣</div>
+          <h3>Landing Pages</h3>
+          <p>Páginas de conversión diseñadas para captar clientes. Alta velocidad, alto impacto.</p>
+          <ul class="service-features">
+            <li>Carga ultra rápida</li>
+            <li>A/B testing ready</li>
+            <li>Integración con email</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal reveal--delay-2" tabindex="0">
+          <div class="service-icon" aria-hidden="true">✍️</div>
+          <h3>Blogs y Revistas</h3>
+          <p>Publicá contenido con estilo. CMS intuitivo para que gestiones tu blog sin ayuda técnica.</p>
+          <ul class="service-features">
+            <li>Editor visual</li>
+            <li>Categorías y tags</li>
+            <li>Newsletter integrado</li>
+          </ul>
+        </article>
+
+        <article class="service-card service-card--highlight reveal reveal--delay-3" tabindex="0">
+          <div class="service-icon" aria-hidden="true">⚡</div>
+          <h3>Dominio + Hosting</h3>
+          <p>Incluido en todos los paquetes. Tu dirección web propia desde el primer día, sin complicaciones.</p>
+          <ul class="service-features">
+            <li>Dominio .com/.ar/.net</li>
+            <li>SSL certificado (https)</li>
+            <li>1 año de hosting</li>
+          </ul>
+          <span class="service-badge service-badge--gold">Incluido siempre</span>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 3 — GALERÍA DE ESTILOS (3 demos visuales)
+  ============================================================ -->
+  <section class="styles-gallery" id="estilos" aria-label="Galería de estilos de diseño">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">Versatilidad de diseño</p>
+        <h2 class="section-title">Cada negocio tiene<br/>su propio lenguaje visual</h2>
+        <p class="section-sub">Estos son tres de los estilos que podemos crear para vos. Podemos adaptar cualquier estética.</p>
+      </div>
+
+      <div class="styles-tabs" role="tablist" aria-label="Estilos de diseño">
+        <button class="tab-btn tab-btn--active" role="tab" aria-selected="true" data-tab="minimal" id="tab-minimal">
+          Minimalista
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="corporate" id="tab-corporate">
+          Corporativo
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="creative" id="tab-creative">
+          Creativo
+        </button>
+      </div>
+
+      <!-- Demo: Minimalista -->
+      <div class="style-demo style-demo--active" id="demo-minimal" role="tabpanel" aria-labelledby="tab-minimal">
+        <div class="demo-minimal">
+          <div class="dm-nav">
+            <span class="dm-logo">Minimal.</span>
+            <div class="dm-nav-links">
+              <span>Inicio</span><span>Acerca</span><span>Contacto</span>
+            </div>
+          </div>
+          <div class="dm-hero">
+            <p class="dm-tag">Consultoría independiente</p>
+            <h3 class="dm-title">Claridad en<br/>cada proyecto.</h3>
+            <p class="dm-desc">Trabajamos con foco en resultados medibles y procesos simples.</p>
+            <button class="dm-btn">Conocer más →</button>
+          </div>
+          <div class="dm-line"></div>
+          <div class="dm-services">
+            <div class="dm-service-item"><span>01</span><p>Estrategia</p></div>
+            <div class="dm-service-item"><span>02</span><p>Diseño</p></div>
+            <div class="dm-service-item"><span>03</span><p>Lanzamiento</p></div>
+          </div>
+        </div>
+        <div class="demo-info">
+          <h4>Estilo Minimalista</h4>
+          <p>Blanco, tipografía serif, mucho espacio negativo. Ideal para consultores, abogados, coaches, profesionales independientes.</p>
+          <ul>
+            <li>Transmite seriedad y elegancia</li>
+            <li>Carga ultrarrápida</li>
+            <li>Foco en el mensaje</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Demo: Corporativo -->
+      <div class="style-demo" id="demo-corporate" role="tabpanel" aria-labelledby="tab-corporate">
+        <div class="demo-corporate">
+          <div class="dc-header">
+            <div class="dc-logo">▲ CORPTECH</div>
+            <div class="dc-nav">
+              <span>Soluciones</span><span>Empresa</span><span>Contacto</span>
+            </div>
+            <button class="dc-cta">Cotizar</button>
+          </div>
+          <div class="dc-hero">
+            <div class="dc-hero-text">
+              <p class="dc-tag">Software empresarial</p>
+              <h3>Tecnología que<br/>escala con vos.</h3>
+              <p>Automatizá procesos, aumentá productividad y reducí costos operativos.</p>
+              <div class="dc-btns">
+                <button class="dc-btn-primary">Empezar ahora</button>
+                <button class="dc-btn-ghost">Ver demo</button>
+              </div>
+            </div>
+            <div class="dc-stats">
+              <div class="dc-stat"><strong>500+</strong><span>Clientes</span></div>
+              <div class="dc-stat"><strong>99.9%</strong><span>Uptime</span></div>
+              <div class="dc-stat"><strong>24/7</strong><span>Soporte</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo-info">
+          <h4>Estilo Corporativo</h4>
+          <p>Degradados azules, tipografía sans-serif, estructura clara. Perfecto para empresas de tecnología, servicios B2B, startups.</p>
+          <ul>
+            <li>Inspira confianza inmediata</li>
+            <li>Presenta métricas de impacto</li>
+            <li>Diseño escalable</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Demo: Creativo -->
+      <div class="style-demo" id="demo-creative" role="tabpanel" aria-labelledby="tab-creative">
+        <div class="demo-creative">
+          <div class="dcr-nav">
+            <span class="dcr-logo">★ LUMINA</span>
+            <span class="dcr-menu">☰</span>
+          </div>
+          <div class="dcr-hero">
+            <div class="dcr-tag-pill">Diseño · Arte · Cultura</div>
+            <h3 class="dcr-title">We make<br/><em>things</em><br/>beautiful.</h3>
+            <div class="dcr-grid-deco">
+              <div class="dcr-box dcr-box--1"></div>
+              <div class="dcr-box dcr-box--2"></div>
+              <div class="dcr-box dcr-box--3"></div>
+            </div>
+          </div>
+          <div class="dcr-footer">
+            <span>Scroll ↓</span>
+            <div class="dcr-dots">
+              <span class="dcr-dot dcr-dot--active"></span>
+              <span class="dcr-dot"></span>
+              <span class="dcr-dot"></span>
+            </div>
+          </div>
+        </div>
+        <div class="demo-info">
+          <h4>Estilo Creativo</h4>
+          <p>Colores vibrantes, layouts asimétricos, tipografía expresiva. Ideal para estudios de diseño, artistas, agencias creativas, marcas lifestyle.</p>
+          <ul>
+            <li>Impacto visual inmediato</li>
+            <li>Diferenciación total</li>
+            <li>Experiencia memorable</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 4 — PROCESO (Estilo Minimalista)
+  ============================================================ -->
+  <section class="process" id="proceso" aria-label="Proceso de trabajo">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-tag">Así trabajamos</p>
+        <h2 class="section-title">Simple, rápido,<br/>sin sorpresas.</h2>
+      </div>
+
+      <div class="process-steps">
+
+        <div class="process-step reveal reveal--delay-1">
+          <div class="step-number" aria-hidden="true">01</div>
+          <div class="step-content">
+            <h3>Conversamos</h3>
+            <p>Contanos qué necesitás. En una llamada o por escrito entendemos tu negocio, tus objetivos y tu estilo.</p>
+          </div>
+          <div class="step-connector" aria-hidden="true"></div>
+        </div>
+
+        <div class="process-step reveal reveal--delay-2">
+          <div class="step-number" aria-hidden="true">02</div>
+          <div class="step-content">
+            <h3>Diseñamos</h3>
+            <p>Creamos una propuesta visual personalizada. Mostramos bocetos antes de empezar el desarrollo.</p>
+          </div>
+          <div class="step-connector" aria-hidden="true"></div>
+        </div>
+
+        <div class="process-step reveal reveal--delay-3">
+          <div class="step-number" aria-hidden="true">03</div>
+          <div class="step-content">
+            <h3>Desarrollamos</h3>
+            <p>Construimos el sitio con código limpio, optimizado y listo para posicionarse en Google.</p>
+          </div>
+          <div class="step-connector" aria-hidden="true"></div>
+        </div>
+
+        <div class="process-step reveal reveal--delay-1">
+          <div class="step-number" aria-hidden="true">04</div>
+          <div class="step-content">
+            <h3>Lanzamos</h3>
+            <p>Tu sitio online en 7 días. Con dominio propio, hosting configurado y todas las pruebas hechas.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="process-cta reveal">
+        <div class="guarantee-box">
+          <span class="guarantee-icon">🛡️</span>
+          <div>
+            <strong>Garantía de satisfacción</strong>
+            <p>Si el diseño no te convence en la primera entrega, lo rehacemos sin costo adicional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECCIÓN 5 — CONTACTO (Estilo oscuro/premium)
+  ============================================================ -->
+  <section class="contact" id="contacto" aria-label="Formulario de contacto">
+    <div class="contact-bg" aria-hidden="true">
+      <div class="contact-glow contact-glow--1"></div>
+      <div class="contact-glow contact-glow--2"></div>
+    </div>
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-info reveal">
+          <p class="section-tag section-tag--light">Hablemos</p>
+          <h2 class="contact-title">Empezá hoy.<br/>Tu sitio web<br/>te espera.</h2>
+          <p class="contact-sub">Contanos tu proyecto y en menos de 24hs tenés una propuesta y precio.</p>
+          <div class="contact-features">
+            <div class="cf-item">
+              <span class="cf-icon">⚡</span>
+              <div>
+                <strong>Respuesta rápida</strong>
+                <p>Te contactamos en menos de 24 horas</p>
+              </div>
+            </div>
+            <div class="cf-item">
+              <span class="cf-icon">💰</span>
+              <div>
+                <strong>Sin compromiso</strong>
+                <p>La consulta y propuesta son gratuitas</p>
+              </div>
+            </div>
+            <div class="cf-item">
+              <span class="cf-icon">🌐</span>
+              <div>
+                <strong>Dominio incluido</strong>
+                <p>Tu dirección .com desde el primer día</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper reveal reveal--delay-2">
+          <form class="contact-form" id="contactForm" novalidate>
+            <h3>Contanos tu proyecto</h3>
+
+            <div class="form-group">
+              <label for="nameInput">Nombre *</label>
+              <input type="text" id="nameInput" name="nombre" placeholder="Tu nombre completo" required autocomplete="name"/>
+            </div>
+
+            <div class="form-group">
+              <label for="emailInput">Email *</label>
+              <input type="email" id="emailInput" name="email" placeholder="tu@email.com" required autocomplete="email"/>
+            </div>
+
+            <div class="form-group">
+              <label for="typeSelect">¿Qué tipo de sitio necesitás?</label>
+              <select id="typeSelect" name="tipo">
+                <option value="">Seleccioná una opción</option>
+                <option value="ecommerce">Tienda Online / E-commerce</option>
+                <option value="corporativo">Sitio Corporativo</option>
+                <option value="portfolio">Portafolio Personal</option>
+                <option value="landing">Landing Page</option>
+                <option value="blog">Blog o Revista</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="messageInput">Contanos más (opcional)</label>
+              <textarea id="messageInput" name="mensaje" rows="3" placeholder="Describí tu negocio, qué querés lograr con el sitio..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--submit" id="submitBtn">
+              Enviar consulta
+              <span class="btn-arrow">→</span>
+            </button>
+
+            <p class="form-disclaimer">Sin spam. Tus datos no se comparten con terceros.</p>
+          </form>
+
+          <div class="form-success" id="formSuccess" aria-live="polite">
+            <div class="success-icon">✓</div>
+            <h3>¡Mensaje recibido!</h3>
+            <p>Te respondemos en menos de 24 horas con una propuesta personalizada.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-icon">⬡</span>
+          <span class="logo-text">[Tu Marca]</span>
+          <p>Sitios web profesionales con dominio incluido. Diseños únicos para cada negocio.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="#servicios">Tiendas Online</a></li>
+            <li><a href="#servicios">Sitios Corporativos</a></li>
+            <li><a href="#servicios">Portafolios</a></li>
+            <li><a href="#servicios">Landing Pages</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="#proceso">Cómo trabajamos</a></li>
+            <li><a href="#estilos">Nuestro trabajo</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contacto directo</h4>
+          <p>📧 <a href="mailto:hola@tumarca.com">hola@tumarca.com</a></p>
+          <p>📱 <a href="https://wa.me/5491100000000">WhatsApp</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 [Tu Marca] · Todos los derechos reservados</p>
+        <p>Diseñado y desarrollado con ♥</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
