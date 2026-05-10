@@ -249,37 +249,25 @@ function initStyleTabs() {
 }
 
 /* ============================================================
-   5. FORMULARIO DE CONTACTO
-   Cómo funciona:
-   - Validación básica de campos requeridos antes de enviar
-   - Muestra errores inline si falta nombre o email inválido
-   - Al enviar exitosamente: oculta el form, muestra mensaje de éxito
-   - Simula envío (timeout de 1.2s) — para conectar a un backend real,
-     reemplazá el bloque "simulateSubmit" por un fetch() a tu API
-
-   Para conectar un backend real:
-     Reemplazá simulateSubmit() por:
-     fetch('/api/contact', { method:'POST', body: formData })
-       .then(r => r.json())
-       .then(data => showSuccess())
-       .catch(err => showError(err))
+   5. FORMULARIO DE CONTACTO REAL CON RESEND
 ============================================================ */
 function initContactForm() {
-  const form       = document.getElementById('contactForm');
+  const form = document.getElementById('contactForm');
   const formSuccess = document.getElementById('formSuccess');
-  const submitBtn  = document.getElementById('submitBtn');
+  const submitBtn = document.getElementById('submitBtn');
 
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Limpiar errores previos
     clearErrors();
 
-    // Validar
-    const name  = document.getElementById('nameInput');
+    const name = document.getElementById('nameInput');
     const email = document.getElementById('emailInput');
+    const message = document.getElementById('messageInput');
+    const siteType = document.getElementById('siteType');
+
     let valid = true;
 
     if (!name.value.trim() || name.value.trim().length < 2) {
@@ -294,14 +282,40 @@ function initContactForm() {
 
     if (!valid) return;
 
-    // Simular envío
     submitBtn.disabled = true;
     submitBtn.textContent = 'Enviando…';
 
-    simulateSubmit(() => {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: name.value,
+          email: email.value,
+          mensaje: `
+Tipo de sitio: ${siteType?.value || 'No especificado'}
+
+Mensaje:
+${message?.value || ''}
+          `,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al enviar');
+      }
+
       form.style.display = 'none';
       formSuccess.classList.add('visible');
-    });
+
+    } catch (error) {
+      alert('Hubo un error al enviar el mensaje');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar consulta →';
+      console.error(error);
+    }
   });
 
   function isValidEmail(email) {
@@ -312,36 +326,20 @@ function initContactForm() {
     const errorEl = document.createElement('p');
     errorEl.className = 'field-error';
     errorEl.textContent = message;
-    errorEl.style.cssText = 'color:#ff6b6b; font-size:0.75rem; margin-top:4px;';
+    errorEl.style.cssText =
+      'color:#ff6b6b; font-size:0.75rem; margin-top:4px;';
+
     input.parentNode.appendChild(errorEl);
     input.style.borderColor = '#ff6b6b';
   }
 
   function clearErrors() {
-    document.querySelectorAll('.field-error').forEach(el => el.remove());
-    document.querySelectorAll('.form-group input, .form-group textarea').forEach(el => {
-      el.style.borderColor = '';
-    });
-  }
+    document.querySelectorAll('.field-error').forEach((el) => el.remove());
 
-  /**
-   * simulateSubmit — Reemplazar con fetch() real en producción
-   * @param {Function} callback - Se ejecuta cuando el "envío" termina
-   */
-  function simulateSubmit(callback) {
-    setTimeout(callback, 1200);
+    document
+      .querySelectorAll('.form-group input, .form-group textarea')
+      .forEach((el) => {
+        el.style.borderColor = '';
+      });
   }
-}
-
-/* ============================================================
-   6. HELPER: SCROLL SUAVE A SECCIÓN
-   Llamado desde botones en el HTML con onclick="scrollToSection('id')"
-   Agrega un offset de 80px para no quedar detrás del navbar fijo.
-============================================================ */
-function scrollToSection(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const navHeight = 80;
-  const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
-  window.scrollTo({ top, behavior: 'smooth' });
 }
